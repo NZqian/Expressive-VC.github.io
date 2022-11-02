@@ -1,290 +1,207 @@
 <!DOCTYPE html>
 <!-- saved from url=(0033)https://QicongXie.github.io/end2endvc/ -->
-<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en-US">
 
-<!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>End-to-end One-shot Voice Conversion with Perturbation based Speech Disentanglement</title>
-<meta name="generator" content="Jekyll v3.9.0">
-<meta property="og:title" content="TODO: title">
-<meta property="og:locale" content="en_US">
-<link rel="canonical" href="https://QicongXie.github.io/end2endvc/">
-<meta property="og:url" content="https://QicongXie.github.io/end2endvc/">
-<meta name="twitter:card" content="summary">
-<!-- End Jekyll SEO tag -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed="">
-    <section class="page-header">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+  <title>EXPRESSIVE-VC: HIGHLY EXPRESSIVE VOICE CONVERSION WITH ATTENTION FUSION OF BOTTLENECK AND PERTURBATION FEATURES
+  </title>
+  <meta name="generator" content="Jekyll v3.9.0">
+  <meta property="og:title" content="TODO: title">
+  <meta property="og:locale" content="en_US">
+  <link rel="canonical" href="https://QicongXie.github.io/end2endvc/">
+  <meta property="og:url" content="https://QicongXie.github.io/end2endvc/">
+  <meta name="twitter:card" content="summary">
+  <!-- End Jekyll SEO tag -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed="">
+  <section class="page-header">
     <!-- <h1 class="project-name">Demo PAGE</h1> -->
     <!-- <h2 class="project-tagline"></h2> -->
-      
-      
-    </section>
-
-<section class="main-content">
-      <h1 id=""><center>End-to-end One-shot Voice Conversion with Perturbation based Speech Disentanglement</center></h1>
-
-<center> Qicong Xie, Shan Yang, Yi Lei, Lei Xie, Dan Su  </center>
-<center> Northwestern Polytechnical University, Xi'an, China </center>
-<center> Tencent AI Lab, China</center>
-
-<h2>0. Contents</h2>
-<ol>
-  <li><a href="#abstract">Abstract</a></li>
-  <li><a href="#Comparison">Demos -- Voice Conversion</a></li>
-  <li><a href="#Control">Demos -- Pitch Control</a></li>
-</ol>
-
-<br><br>
-<h2 id="abstract">1. Abstract<a name="abstract"></a></h2>
-<p> 
-  The ideal goal of voice conversion is to convert the source speaker's speech to sound naturally like the target speaker while maintaining the linguistic content and the prosody of the source speech. However, current approaches are insufficient to achieve comprehensive source prosody transfer and target speaker timbre preservation in the converted speech, and the quality of the converted speech is also unsatisfied due to the mismatch between the acoustic model and the vocoder. In this paper, we leverage the recent advances in information perturbation and propose a fully end-to-end approach to conduct high-quality voice conversion. We first adopt information perturbation to remove speaker-related information in the source speech to disentangle speaker timbre and linguistic content and thus the linguistic information is subsequently modeled by a content encoder.  To better transfer the prosody of the source speech to the target, we particularly introduce a speaker-related pitch encoder which can maintain the general pitch pattern of the source speaker while flexibly modifying the pitch intensity of the generated speech. 
-  Finally, one-shot voice conversion is set up through continuous speaker space modeling. Experimental results indicate that the proposed end-to-end approach significantly outperforms the state-of-the-art models in terms of quality, naturalness, and speaker similarity.</p>
-	
-  <table frame=void rules=none>
-    <tr > <td colspan=3><center><img src='raw/fig/overall.png'></center>  </td></tr>
-    <tr>
-    <td><center><img src='raw/fig/content.png' border=0></center></td>
-    <td><center><img src='raw/fig/spknet.png' border=0></center></td>
-    <td><center><img src='raw/fig/pitchnet.png' border=0></center></td>
-    </tr></table>
-<br><br>
 
 
-<h2>2. Demos -- Voice Conversion<a name="Comparison"></a></h2>
-<!-- <h3>Corresponding to section 3.2 in our paper, below lists the samples that are synthesized for evaluations on the ability to generate the desired speaking style and timbre. We compared our proposed method with the Multi-R and PB on style similarity and speaker similarity.</h3> -->
+  </section>
 
-<table>
-  <tbody>
-    <!-- seen2seen -->
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=2><strong>Scenario<strong></td>
-      <td style="text-align: center; width: 150px;" rowspan=2><strong>Target Speaker<strong></td>
-      <td style="text-align: center; width: 150px;" rowspan=2><strong>Source speech<strong></td>
-      <td style="text-align: center; width: 150px;" colspan=3><strong>Method<strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>AGAIN-VC<strong></td>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>NVC-Net<strong></td>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>Proposed<strong></td>
-    </tr>
+  <section class="main-content">
+    <h1 id="">
+      <center>EXPRESSIVE-VC: HIGHLY EXPRESSIVE VOICE CONVERSION WITH ATTENTION FUSION OF BOTTLENECK AND PERTURBATION
+        FEATURES</center>
+    </h1>
 
-    <tr>
-        <td style="text-align: center; width: 150px;" rowspan=4><strong>seen2seen<strong></td>
-        <td style="text-align: center; width: 150px;" rowspan=1><strong>p314 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/ref1/p314_train_less_p225_352.wav"></td>
-        <td style="text-align: center"><strong>p225 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p225_352.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/again/p314_train_less_p225_352.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/nvcnet/p314_train_less_p225_352.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/porposed/p314_train_less_p225_352.wav"></audio></td>
-    </tr>
-    
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>p334 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/ref1/p334_train_less_p260_060.wav"></td>
-        <td style="text-align: center"><strong>p260 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/again/p334_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/nvcnet/p334_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/porposed/p334_train_less_p260_060.wav"></audio></td>
-    </tr>
+    <center>Ziqian Ning, Qicong Xie, Pengcheng Zhu, Zhichao Wang, Liumeng Xue, Jixun Yao, Lei Xie, Mengxiao Bi</center>
+    <center> Northwestern Polytechnical University, Xi'an, China </center>
+    <center> Fuxi AI Lab, NetEase Inc., Hangzhou, China </center>
 
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>p334 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/ref1/p334_train_less_p245_146.wav"></td>
-      <td style="text-align: center"><strong>p245 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p245_146.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/again/p334_train_less_p245_146.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/nvcnet/p334_train_less_p245_146.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/porposed/p334_train_less_p245_146.wav"></audio></td>
-  </tr>
+    <h2>0. Contents</h2>
+    <ol>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#Comparison">Demos</a></li>
+    </ol>
 
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>p314 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/ref1/p314_train_less_p260_060.wav"></td>
-        <td style="text-align: center"><strong>p260 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/again/p314_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/nvcnet/p314_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/porposed/p314_train_less_p260_060.wav"></audio></td>
-    </tr>
+    <br><br>
+    <h2 id="abstract">1. Abstract<a name="abstract"></a></h2>
+    <p>Voice conversion for highly expressive speech is challenging. Current approaches struggle with the balancing
+      between speaker similarity, intelligibility and expressiveness.
+      To address this problem, we propose Expressive-VC, a novel end-to-end voice conversion framework that leverages
+      advantages from both neural bottleneck feature (BNF) approach and information perturbation approach.
+      Specifically, we use a BNF encoder and a Perturbed-Wav encoder to form a content extractor to learn linguistic and
+      para-linguistic features respectively, where BNFs come from a robust pre-trained ASR model and the perturbed wave
+      becomes speaker-irrelevant after signal perturbation.
+      We further fuse the linguistic and para-linguistic features through an attention mechanism, where
+      speaker-dependent prosody features are adopted as the attention query, which result from a prosody encoder with
+      target speaker embedding and normalized pitch and energy of source speech as input.
+      Finally the decoder consumes the integrated features and the speaker-dependent prosody feature to generate the
+      converted speech.
+      Experiments demonstrate that Expressive-VC is superior to several state-of-the-art systems, achieving both high
+      expressiveness captured from the source speech and high speaker similarity with the target speaker; meanwhile
+      intelligibility is well maintained.</p>
 
-
-    <!-- unseen2seen -->
-
-    <tr>
-          <td style="text-align: center; width: 150px;" rowspan=4><strong>unseen2seen<strong></td>
-            <td style="text-align: center; width: 150px;" rowspan=1><strong>p314 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/ref1/p314_unseen_less_p351_004.wav"></td>
-              <td style="text-align: center"><strong>p351 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p351_004.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/again/p314_unseen_less_p351_004.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/nvcnet/p314_unseen_less_p351_004.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/porposed/p314_unseen_less_p351_004.wav"></audio></td>
-        
-    </tr>
-    
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>p334 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/ref1/p334_unseen_less_p351_004.wav"></td>
-        <td style="text-align: center"><strong>p351 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p351_004.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/again/p334_unseen_less_p351_004.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/nvcnet/p334_unseen_less_p351_004.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/porposed/p334_unseen_less_p351_004.wav"></audio></td>
-    
-</tr>
-
-  <tr>
-    <td style="text-align: center; width: 150px;" rowspan=1><strong>p314 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/ref1/p314_unseen_less_p363_008.wav"></td>
-      <td style="text-align: center"><strong>p363 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p363_008.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/again/p314_unseen_less_p363_008.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/nvcnet/p314_unseen_less_p363_008.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/porposed/p314_unseen_less_p363_008.wav"></audio></td>
-
-  </tr>
-
-  <tr>
-    <td style="text-align: center; width: 150px;" rowspan=1><strong>p334 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/ref1/p334_unseen_less_p363_008.wav"></td>
-      <td style="text-align: center"><strong>p363 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p363_008.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/again/p334_unseen_less_p363_008.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/nvcnet/p334_unseen_less_p363_008.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/2-unseen2seen/porposed/p334_unseen_less_p363_008.wav"></audio></td>
-
-  </tr>
+    <table frame=void rules=none>
+      <tr>
+        <td colspan=3>
+          <center><img src='raw/fig/overall.png'></center>
+        </td>
+        <td>
+          <center><img src='raw/fig/fusionmodule.png' border=0></center>
+        </td>
+      </tr>
+      <tr>
+      </tr>
+    </table>
+    <br><br>
 
 
+    <h2>2. Demos -- Voice Conversion<a name="Comparison"></a></h2>
+    <!-- <h3>Corresponding to section 3.2 in our paper, below lists the samples that are synthesized for evaluations on the ability to generate the desired speaking style and timbre. We compared our proposed method with the Multi-R and PB on style similarity and speaker similarity.</h3> -->
 
-    <!-- seen2unseen -->
+    <table>
+      <tbody id="tbody">
+        <!--
+        <tr>
+          <td style="text-align: center; width: 150px;" rowspan=2><strong>Scenario<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=2><strong>Target Speaker<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=2><strong>Source speech<strong></td>
+          <td style="text-align: center; width: 150px;" colspan=4><strong>Method<strong></td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>AGAIN-VC<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>Perturb-VC<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>BNF-VC<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>Expressive-VC<strong></td>
+        </tr>
+      -->
 
-    <tr>
-          <td style="text-align: center; width: 150px;" rowspan=4><strong>seen2unseen<strong></td>
-            <td style="text-align: center; width: 150px;" rowspan=1><strong>p351 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/ref1/p351_train_less_p239_460.wav"></td>
-              <td style="text-align: center"><strong>p239 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p239_460.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/again/p351_train_less_p239_460.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/nvcnet/p351_train_less_p239_460.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/porposed/p351_train_less_p239_460.wav"></audio></td>
-        
-    </tr>
-    
-  <tr>
-    <td style="text-align: center; width: 150px;" rowspan=1><strong>p347 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/ref1/p347_train_less_p239_460.wav"></td>
-      <td style="text-align: center"><strong>p239 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p239_460.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/again/p347_train_less_p239_460.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/nvcnet/p347_train_less_p239_460.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/porposed/p347_train_less_p239_460.wav"></audio></td>
-  </tr>
-  <tr>
-    <td style="text-align: center; width: 150px;" rowspan=1><strong>p351 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/ref1/p351_train_less_p260_060.wav"></td>
-      <td style="text-align: center"><strong>p260 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/again/p351_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/nvcnet/p351_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/porposed/p351_train_less_p260_060.wav"></audio></td>
-  </tr>
-  <tr>
-    <td style="text-align: center; width: 150px;" rowspan=1><strong>p347 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/ref1/p347_train_less_p260_060.wav"></td>
-      <td style="text-align: center"><strong>p260 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/seen/p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/again/p347_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/nvcnet/p347_train_less_p260_060.wav"></audio></td>
-      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/3-seen2unseen/porposed/p347_train_less_p260_060.wav"></audio></td>
-  </tr>
+        <!-- expressive -->
+        <!-- male -->
 
-    <!-- unseen2unseen -->
+        <!--
+        <tr id="expressive">
+          <td style="text-align: center; width: 150px;" rowspan=10><strong>expressive<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=5><audio style="width: 150px;"
+                  controls="" preload="none" src="raw/samples/expressive/source/db6_angry_220005.wav"></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls=""
+                preload="none" src="raw/samples/expressive/source/db6_angry_220005.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/againvc/27/db6_angry_220005.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/perturb/27/db6_angry_220005.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/bn/27/db6_angry_220005.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/proposed/27/db6_angry_220005.wav"></audio></td>
+        </tr>
 
-    <tr>
-          <td style="text-align: center; width: 150px;" rowspan=4><strong>unseen2unseen<strong></td>
-            <td style="text-align: center; width: 150px;" rowspan=1><strong>p351 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/ref1/p351_unseen_less_p362_003.wav"></td>
-              <td style="text-align: center"><strong>p262 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p362_003.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/again/p351_unseen_less_p362_003.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/nvcnet/p351_unseen_less_p362_003.wav"></audio></td>
-              <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/porposed/p351_unseen_less_p362_003.wav"></audio></td>
-        
-    </tr>
-    
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>p347 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/ref1/p347_unseen_less_p362_003.wav"></td>
-        <td style="text-align: center"><strong>p262 (F)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p362_003.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/again/p347_unseen_less_p362_003.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/nvcnet/p347_unseen_less_p362_003.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/porposed/p347_unseen_less_p362_003.wav"></audio></td>
-    </tr>
+        <tr>
+          <td style="text-align: center"><audio style="width: 150px;" controls=""
+                preload="none" src="raw/samples/expressive/source/db6_sad_230002.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/againvc/27/db6_sad_230002.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/perturb/27/db6_sad_230002.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/bn/27/db6_sad_230002.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none"
+              src="raw/samples/expressive/proposed/27/db6_sad_230002.wav"></audio></td>
+        </tr>
+      -->
 
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>p351 (F)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/ref1/p351_unseen_less_p363_008.wav"></td>
-        <td style="text-align: center"><strong>p363 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p363_008.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/again/p351_unseen_less_p363_008.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/nvcnet/p351_unseen_less_p363_008.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/porposed/p351_unseen_less_p363_008.wav"></audio></td>
-    </tr>
+      </tbody>
 
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>p347 (M)<strong><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/ref1/p347_unseen_less_p363_008.wav"></td>
-        <td style="text-align: center"><strong>p363 (M)<strong></strong><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p363_008.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/again/p347_unseen_less_p363_008.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/nvcnet/p347_unseen_less_p363_008.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/4-unseen2unseen/porposed/p347_unseen_less_p363_008.wav"></audio></td>
-    </tr>
-
-  </tbody>
-
-
-
-
-
-
-</table>
-
-<h2>2. Demos -- Pitch Control<a name="Control"></a></h2>
-
-
-<table>
-  <tbody>
-    <!-- seen2seen -->
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=2><strong>Target Speaker<strong></td>
-      <!-- <td style="text-align: center; width: 150px;" rowspan=2><strong>Target Speaker<strong></td> -->
-      <td style="text-align: center; width: 150px;" rowspan=2><strong>Source speech<strong></td>
-      <td style="text-align: center; width: 150px;" colspan=3><strong>Method<strong></td>
-    </tr>
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>decrease<strong></td>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>not adjust<strong></td>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>increase<strong></td>
-    </tr>
-
-    <tr>
-        <td style="text-align: center; width: 150px;" rowspan=4><audio style="width: 150px;" controls="" preload="none" src="raw/1-seen2seen/ref1/p314_train_less_p225_352.wav"></audio></td>
-        <td style="text-align: center; width: 150px;" rowspan=1><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p347_004.wav"></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_decrease/p347_004.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_0/p347_004.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_increase/p347_004.wav"></audio></td>
-    </tr>
-    
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p347_005.wav"></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_decrease/p347_005.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_0/p347_005.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_increase/p347_005.wav"></audio></td>
-    </tr>
-
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p351_004.wav"></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_decrease/p351_004.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_0/p351_004.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_increase/p351_004.wav"></audio></td>
-  </tr>
-
-    <tr>
-      <td style="text-align: center; width: 150px;" rowspan=1><audio style="width: 150px;" controls="" preload="none" src="raw/source/unseen/p351_005.wav"></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_decrease/p351_005.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_0/p351_005.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="raw/control/p314_unseen_increase/p351_005.wav"></audio></td>
-    </tr>
-
-
-
-  </tbody>
-
-
-
-
-</table>
+      <!--
       <footer class="site-footer">
-        
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub
+            Pages</a>.</span>
       </footer>
-    </section>
-</body></html>
+    -->
+  </section>
+</body>
+
+</html>
+
+<script type="" text/javascript>
+  window.onload = function () {
+    console.log("load")
+    let scenes = ["expressive", "non-expressive", "non-verbal"]
+    let speakers = ["27", "db3"]
+    let models = ["againvc", "perturb", "bn", "proposed"]
+    //let expressive_samples = ["db6_angry_220005.wav", "db6_sad_230002.wav", "frozen_OLAF_M_PRC_R4_dup2_TC1014_5.wav", "han-2.wav", "movie_44.wav"]
+    //let non_expressive_samples = ["1.wav", "2.wav", "412-412455.wav", "418-419001.wav", "M2VoC_male-000342.wav"]
+    //let non_verbal_samples = ["cough_2.wav", "cough1.wav", "cry_2.wav", "laugh_2.wav", "movie_04.wav"]
+    let all_samples = [["db6_angry_220005.wav", "db6_sad_230002.wav", "frozen_OLAF_M_PRC_R4_dup2_TC1014_5.wav", "han-2.wav", "movie_44.wav"], 
+                    ["1.wav", "4.wav", "412-412455.wav", "418-419001.wav", "M2VoC_male-000342.wav"],
+                    ["cough_2.wav", "cough1.wav", "cry_2.wav", "laugh_2.wav", "movie_04.wav"]]
+    let sample_data = `
+        <tr>
+          <td style="text-align: center; width: 150px;" rowspan=2><strong>Scenario<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=2><strong>Target Speaker<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=2><strong>Source speech<strong></td>
+          <td style="text-align: center; width: 150px;" colspan=4><strong>Method<strong></td>
+        </tr>
+        <tr>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>AGAIN-VC<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>Perturb-VC<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>BNF-VC<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>Expressive-VC<strong></td>
+        </tr>
+        `
+    for (let x in scenes) {
+      let scene = scenes[x]
+      let scene_data = ""
+      scene_data += '<tr>'
+      scene_data += '<td style="text-align: center; width: 150px;" rowspan=10><strong>' + scene + '<strong></td>'
+      let samples = all_samples[x]
+      console.log(scene, samples)
+      for (let y in speakers) {
+        speaker = speakers[y]
+        scene_data += '<td style="text-align: center; width: 150px;" rowspan=5><audio style="width: 150px;"controls="" src="raw/samples/speakers/' + speaker + '.wav"></td>'
+        //scene_data += '<tr>'
+        ////scene_data += '<td style="text-align: center; width: 150px;" rowspan=5><audio style="width: 150px;"controls="" preload="none" src="raw/samples/' + scene + '/source/' + '"></td>'
+        //scene_data += '<td style="text-align: center; width: 150px;" rowspan=5><audio style="width: 150px;"controls="" src="raw/samples/speakers/' + speaker + '.wav"></td>'
+        //scene_data += '</tr>'
+        for (let z in samples) {
+          if (z != 0) {
+            scene_data += '<tr>'
+          }
+          let sample = samples[z]
+          scene_data += '<td style="text-align: center"><audio style="width: 150px;" controls="" src="raw/samples/' + scene + '/source/' + sample + '"></audio></td>'
+          for (let w in models) {
+            let model = models[w]
+            scene_data += '<td style="text-align: center"><audio style="width: 150px;" controls="" src="raw/samples/' + scene + '/' + model + '/' + speaker + '/' + sample + '"></audio></td>'
+          }
+          scene_data += '</tr>'
+        }
+      }
+      sample_data += scene_data
+    }
+    document.getElementById('tbody').innerHTML = sample_data
+  }
+</script>
